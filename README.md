@@ -1,88 +1,372 @@
-# FILM INDUSTRY ANALYSIS FOR GOLDEN ARC PICTURES
-## 1.0 Project Overview
-This project is about analysis of the film industry to help Golden Arc Pictures make more informed decisions. The analysis is based on data provided  by various film industry companies. The analysis involves Exploratory Data Analysis(EDA) on various datasets to identify trends in successful films and thus helping us come up with actionable business recommendations.
-## 2.0 Business Understanding
-The aim is to guide Golden Arc Pictures in identifying what type of film is more likely to succeed at the box office based on the historical performance of other movie studios in the box office market. The analysis is based on the following data sources;
-## 3.0 Data sources
-  - Box Office Mojo: Gross earnings and box office performance.
-  - Rotten Tomatoes: Critic and audience scores.
-  - IMDb Links: Unique identifiers to cross-reference movies across datasets.
-  - TheMovieDB: Provides data on movies including genres, languages, production countries, popularity, and more.
-  - The Numbers: Gives us financial details such as production budgets and revenues to help calculate ROI.
-### 3.1 Stakeholders Needs
- - Maximize profit by identifying the most profitable genres.
- - Minimize risk by avoiding investment with movie genres with poor ROI
-### 3.2 Key Business Questions
-  - What is the impact of language on popularity?
-  - What effect does runtime have on rating?
-  - Is there a relationship between production budget and ROI?
-## 4.0 Data Understanding
-This is divided into four different steps that were handled collaboratively by each member.
-### 4.1 Data Exploration
-This step was aimed at each member familiriazing themselves with the datasets provided,i.e:
- - Identifying the important columns that will help with the analysis.
- - Finding missing values and duplictes and any inconsistency in the data e.g Outliers.
- - Identifying potential relationship in the datasets columns to help in more exploration.
- - Checking for information and the datatypes to enable cleaning of the data.
-### 4.2 Data Cleaning
-After the Data exploration we moved to the next step of data cleaning.We;
- - Removed the none numerical characters(punctuaction marks)
- - Handled missing values and inconsitencies by dropping them
- - Standardized the date formats,i.e Separated the year and month
- - Did some feature engineering by adding new columns such as, Revenue,Profit and ROI.
- - Converted release_date into datetime format.
-This steps ensured that we have cleaned data to help with visualizations and build models that will gives us a more deepen insight.
-### 4.3  Visualization
-The aim of the visualization is to check for relationship between different column to draw insights that will help with our analysis and findings thus giving recommendations.We used;
-  - A Barplot - To show the relationship between Production Revenue and ROI
-  - A Barplot - To show the effect of runtime to ratings
-  - A Histogram - To show how revenue is distributed across different studios
-  - A Barplot - Showing the average rating per genre
-### 4.4 Hypothesis Testing
-The aim of the hypothesis testing was to statistically challenge or support the finding on the visualization analysis.
+# NLP Sentiment Classification Project
 
-- We used the ANOVA
-- We focused on validating different insights,like;
-   -ROI impact on success
-   -Revenue distribution on different studios
-   -Runtime and rating relationship.
+## Apple & Google Product Sentiment Analysis
 
-## 5.0 KEY VISUALIZATION
-Below we have different viasualization that gives insights into the film industry;
-  1. Visualization showing the relationship between production budget and ROI
-  ![alt text](image.png)
+![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
+![NLP](https://img.shields.io/badge/NLP-Sentiment%20Analysis-green.svg)
+![Machine Learning](https://img.shields.io/badge/ML-Classification-orange.svg)
+
+---
+
+## 📋 Project Overview
+
+This project develops an **NLP sentiment classification system** that automatically analyzes Twitter (X) data to identify sentiment toward Apple and Google products. Using advanced natural language processing techniques and machine learning models, we classify tweets into sentiment categories to help stakeholders understand public opinion and make data-driven decisions.
+
+**Author:** Group 7  
+**Date:** December 2024
+
+---
+
+## 🎯 Business Understanding
+
+### Problem Statement
+
+Technology companies like Apple and Google need to monitor real-time public sentiment expressed on social media platforms. With millions of tweets generated daily, manual analysis is impractical and inefficient.
+
+**Key Business Questions:**
+- How are users reacting to new product launches or feature updates?
+- Are negative emotions suddenly increasing around a particular product?
+- Which products attract the most positive engagement?
+- How does Apple's sentiment compare to Google's?
+
+### Stakeholders
+
+- **Primary:** Product and Marketing Teams at Apple and Google
+- **Secondary:** 
+  - Customer Experience Analysts
+  - Social Media Managers
+  - Competitor Intelligence Teams
+  - Consumer Behavior Researchers
+
+### Solution Value
+
+Our automated sentiment classification model provides:
+- ✅ Scalable, real-time sentiment monitoring
+- ✅ Faster insights for strategic decision-making
+- ✅ Early detection of sentiment shifts
+- ✅ Data-driven product improvement prioritization
+- ✅ Competitive benchmarking between brands
+
+---
+
+## 📊 Dataset Description
+
+### Overview
+
+- **Total Tweets:** 9,093 (after cleaning: 9,071)
+- **Data Source:** [Data.world Twitter Dataset](https://query.data.world/s/3r3b3chhfpyo7545c4regquyxcmc34)
+- **Features:**
+  - `tweet_text` – Full content of the tweet
+  - `emotion_in_tweet_is_directed_at` – Target brand/product (Apple, Google, etc.)
+  - `is_there_an_emotion_directed_at_a_brand_or_product` – Sentiment label
+
+### Data Characteristics
+
+- **Unique Tweets:** 9,065 (high diversity)
+- **Brands Covered:** Apple (iPhone, iPad, Mac), Google (Android, Nexus, Pixel)
+- **Sentiment Distribution:**
+  - No emotion toward brand/product
+  - Positive emotion
+  - Negative emotion
+  - Neutral (can't tell)
+- **Missing Data:** 63.8% in brand-target column (many generic tweets)
+- **Duplicates:** 22 records (<0.25%)
+
+---
+
+## 🔧 Methodology
+
+### 1. Data Preparation
+
+#### Data Cleaning
+- Removed duplicate tweets (22 records)
+- Handled missing values by filtering tweets with clear brand targets
+- Normalized column names for clarity
+
+#### Text Preprocessing
+- **Lowercase conversion** for consistency
+- **URL removal** (http, www patterns)
+- **Mention removal** (@username patterns)
+- **Hashtag symbol removal** (kept the text)
+- **Special character removal** (punctuation, numbers)
+- **Stopword removal** (common English words)
+- **Lemmatization** (word normalization)
+
+#### Brand Classification
+- Grouped products into two main categories:
+  - **Apple:** iPhone, iPad, Mac, iOS
+  - **Google:** Android, Nexus, Pixel
+
+### 2. Exploratory Data Analysis (EDA)
+
+#### Key Insights Discovered
+
+1. **Sentiment Distribution**
+   - Analyzed overall sentiment patterns
+   - Compared sentiment across Apple vs. Google
+   
+2. **Text Length Analysis**
+   - Average tweet length by sentiment
+   - Distribution patterns of word counts
+
+3. **Word Frequency Analysis**
+   - Top positive sentiment words
+   - Top negative sentiment words
+   - Bigram analysis for context
+
+4. **Product-Specific Insights**
+   - Most positive product: Identified through sentiment counts
+   - Most negative product: Highlighted areas of concern
+   - Keyword analysis (battery, crash, lag, slow, overheat, bug)
+
+5. **Visual Insights**
+   - Word clouds for positive and negative sentiments
+   - Sentiment distribution by company
+   - Product comparison charts
+
+### 3. Feature Engineering
+
+Our comprehensive feature engineering approach includes:
+
+#### A. TF-IDF Vectorization
+- **Max Features:** 5,000
+- **N-gram Range:** Unigrams and bigrams (1, 2)
+- **Min/Max Document Frequency:** 2 and 0.95
+- Captures word importance across the corpus
+
+#### B. Numeric Features (19 features total)
+
+**Basic Text Statistics:**
+- Character count
+- Word count
+- Average word length
+
+**Sentiment Indicators:**
+- Exclamation mark count
+- Question mark count
+- Positive word count (good, great, excellent, etc.)
+- Negative word count (bad, terrible, horrible, etc.)
+
+**Social Media Signals:**
+- Uppercase character count (intensity)
+- Hashtag count
+- Mention count (@username)
+
+**Company Encoding:**
+- Binary flag for Apple
+- Binary flag for Google
+
+**Advanced Linguistic Features:**
+- Punctuation density
+- Capital letter ratio
+- Unique word ratio (vocabulary diversity)
+- Repeated character patterns (e.g., "soooo")
+- URL presence indicator
+- Ellipsis count
+- Average sentence length
+
+#### C. Feature Scaling & Combination
+- StandardScaler normalization for numeric features
+- Combined TF-IDF (5,000 dims) + Numeric (19 dims) = **5,019 total features**
+
+#### D. Target Encoding
+- Label encoding for sentiment categories
+- Mapping: Each sentiment label → numeric code
+
+### 4. Train-Test Split
+- **Split Ratio:** 80% training, 20% testing
+- **Stratified Sampling:** Maintains class distribution
+- **Random State:** 42 (for reproducibility)
+
+---
+
+## 🤖 Machine Learning Models
+
+### Baseline Models
+
+1. **Logistic Regression**
+   - Linear classification approach
+   - Fast training and inference
+   - Good interpretability
+
+2. **Multinomial Naive Bayes**
+   - Probabilistic classifier
+   - Works well with text data
+   - Handles sparse features efficiently
+
+3. **Random Forest**
+   - Ensemble learning method
+   - Handles non-linear relationships
+   - Feature importance analysis
+
+4. **Support Vector Machine (SVM)**
+   - Powerful for high-dimensional data
+   - Finds optimal decision boundaries
+   - Kernel-based classification
+
+### Advanced Model
+
+5. **LSTM (Long Short-Term Memory)**
+   - Deep learning approach
+   - Captures sequential patterns
+   - Handles long-range dependencies
+   - Uses word embeddings
+
+---
+
+## 📈 Model Evaluation Metrics
+
+Models are evaluated using:
+- **Accuracy:** Overall correctness
+- **Precision:** Positive prediction accuracy
+- **Recall:** True positive detection rate
+- **F1-Score:** Harmonic mean of precision and recall
+- **Confusion Matrix:** Detailed classification breakdown
+
+---
+
+## 📁 Project Structure
+
+```
+PHASE 4 PROJECT/
+│
+├── README.md                  # Project documentation (this file)
+├── requirements.txt           # Python dependencies
+│
+├── data/                      # Data files
+│   ├── links.csv
+│   ├── movies.csv
+│   ├── ratings.csv
+│   ├── reviews.csv
+│   └── tags.csv
+│
+└── notebook/
+    └── NLP_Analysis.ipynb     # Main analysis notebook
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+```bash
+Python 3.8+
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+nltk
+tensorflow
+wordcloud
+```
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Download NLTK resources:
+   ```python
+   import nltk
+   nltk.download('stopwords')
+   nltk.download('wordnet')
+   ```
+
+4. Open and run the notebook:
+   ```bash
+   jupyter notebook notebook/NLP_Analysis.ipynb
+   ```
+
+---
+
+## 📊 Key Results
+
+### Feature Engineering Achievements
+
+- **5,019 total engineered features** combining:
+  - 5,000 TF-IDF features (text patterns)
+  - 19 handcrafted numeric features (linguistic signals)
   
-  2. Visualization showing how runtime affects ratings
-  ![alt text](image-1.png)
+- **Comprehensive preprocessing pipeline**:
+  - Text cleaning and normalization
+  - Stopword removal and lemmatization
+  - Brand classification and encoding
   
-  4. Visualization showing the impact that different language has on popularity
-  ![alt text](image-2.png)
+- **Rich feature set** capturing:
+  - Semantic meaning (TF-IDF)
+  - Emotional intensity (punctuation, capitals)
+  - Social media patterns (hashtags, mentions)
+  - Linguistic diversity (unique word ratios)
 
-## 6.0 Tableau Interactive Dashboard
-https://public.tableau.com/app/profile/boniface.njeri/viz/Phase2-ProjectforGroup6GoldenArcPicturesonLaunchingNewMovieStudio/Dashboard1?publish=yes
-  ## 7.0 CONCLUSION
-  ### 7.1 Findings
-    - Japanese(ja) language has the highest popularity as compared to other languages.French(fr) and English(en) languages follow closely on the popularity ratings creating a good base  for cross market film releases.
-    - PG-13 rated films have the highest runtime as compared to other films with an average runtime of (110-120) minutes.
-    - Low budget films within the range of (0-10M) have the highest ROI as compared to high budget films. As budget increase the ROI significantly decreases.
+### Model Performance
 
-  ### 7.2 Business Recommendations
-    - Golden Arc Pictures should target a more global niche for the film to increase its popularity and reach. This will capture a large audience and should incoporate different cultures,i.e japanese, french and english cultures.
-    - The company should produce films with long runtime for PG-13 and above and shorter runtime for G and NR.
-    - Golden Arc Pictures should evaluate risk in comparison to the reward when setting up production budget. High budget film may earn more gross revenue but have a low ROI due to high marketing cost among other factors. Therefore a low budget film is more recommended.
+*(Model results will be added after training and evaluation)*
 
+---
 
-  ## 8.0 Tools Used in Analysis
-   > Python for  analysis
-   > Pandas and Numpy for manipulation, calculations and analysis of the datasets
-   > Matplotlib and Seaborn for visualization
-   > Scipy and Statsmodels for hypothesis testing,(ANOVA)
+## 🔮 Future Work
 
-  ## 9.0 Collaborators
-    1. Erick Kibugi
-    2. Hilda Jerotich
-    3. Alice Muia
-    4. Barnice Wandeto
-    5. David Muriithi
-    6. Boniface Njeri
-    7. Emmanuel Kipleting
+1. **Model Enhancement**
+   - Hyperparameter tuning with GridSearchCV
+   - Ensemble methods combining multiple models
+   - Transformer-based models (BERT, RoBERTa)
+
+2. **Feature Engineering**
+   - Sentiment lexicons (VADER, TextBlob)
+   - Part-of-speech tagging
+   - Named entity recognition
+   - Emoji sentiment analysis
+
+3. **Production Deployment**
+   - Real-time sentiment monitoring API
+   - Dashboard for visualization
+   - Automated alerting system
+
+4. **Social Impact Application**
+   - Adapt model for mental health monitoring
+   - Depression detection from social media text
+   - Early intervention systems
+
+---
+
+## 📝 Conclusions
+
+This project successfully demonstrates the application of NLP and machine learning techniques to solve a real-world business problem. By automating sentiment analysis of social media data, we enable technology companies to:
+
+- Monitor brand perception at scale
+- Respond quickly to customer sentiment shifts
+- Make data-driven product and marketing decisions
+- Benchmark competitive positioning
+
+The comprehensive feature engineering approach, combining TF-IDF with handcrafted linguistic features, provides models with rich information for accurate sentiment classification.
+
+---
+
+## 👥 Contributors
+
+**Group 7 - Phase 4 Project**
+
+---
+
+## 📄 License
+
+This project is for educational purposes as part of a data science curriculum.
+
+---
+
+## 🙏 Acknowledgments
+
+- Data source: Data.world Twitter Dataset
+- NLTK library for text processing tools
+- Scikit-learn for machine learning implementations
+- TensorFlow/Keras for deep learning capabilities
+
+---
+
+*Last Updated: December 2024*
+
